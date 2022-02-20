@@ -12,7 +12,7 @@ Let's get started!
 🎈 Include a brief description of the features your syntax extension provides. For example:
 -->
 
-**zed** provides syntax highlighting for the SpikeDB schema syntax.
+**zed** provides syntax highlighting for the SpiceDB schema syntax.
 
 <!--
 🎈 It can also be helpful to include a screenshot or GIF showing your extension in action:
@@ -37,3 +37,8 @@ Support for:
 
 P.S. If you'd like, you can remove these comments before submitting your extension 😉
 -->
+
+
+## Icon
+
+(Schema icons created by iconixar - Flaticon)[https://www.flaticon.com/free-icons/schema"]
