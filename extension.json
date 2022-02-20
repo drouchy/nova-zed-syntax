@@ -4,5 +4,8 @@
     "organization": "Rouchy",
     "description": "SpikeDB schema definition syntax grammar.",
     "version": "1.0",
-    "categories": ["languages"]
+    "categories": ["languages"],
+    
+    "repository": "https://github.com/drouchy/nova-zed-syntax",
+    "bugs": "https://github.com/drouchy/nova-zed-syntax/issues",
 }
