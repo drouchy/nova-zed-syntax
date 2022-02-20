@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<syntax name="zed">
+    <meta>
+        <name>zed</name>
+        <type>structured</type>
+        <preferred-file-extension>zed</preferred-file-extension>
+    </meta>
+    
+    <detectors>
+        <extension priority="1.0">zed</extension>
+    </detectors>
+    
+    <indentation>
+        <increase>
+            <expression>(\([^)\"']*$)</expression>
+        </increase>
+        <decrease>
+            <expression>^\s*(\s*/\*.*\*/\s*)*[\)]</expression>
+        </decrease>
+    </indentation>
+    
+    <comments>
+        <single>
+            <expression>//</expression>
+        </single>
+        <multiline>
+            <starts-with>
+                <expression>/**</expression>
+            </starts-with>
+            <ends-with>
+                <expression>*/</expression>
+            </ends-with>
+        </multiline>
+    </comments>
+    
+    <brackets>
+        <pair open="{" close="}" />
+    </brackets>
+    
+    <scopes>        
+        <scope name="zed.definition">
+            <symbol type="definition">
+                <context behavior="subtree" group="definition" />
+            </symbol>
+            <starts-with>
+                <expression>\b(definition)\s+([^\s:;,.{}()&lt;&gt;\-–—!@#$%^&amp;*+=?&quot;&apos;\\|]+)\s*({)</expression>
+                <capture number="1" name="zed.keyword" />
+                <capture number="2" name="zed.identifier.type.name" />
+                <capture number="3" name="zed.bracket" />
+            </starts-with>
+            <ends-with>
+                <expression>\}</expression>
+                <capture number="0" name="zed.bracket" />
+            </ends-with>
+            <subscopes>
+                <include syntax="self" collection="comments" />
+                <include syntax="self" collection="relation" />
+                <include syntax="self" collection="permission" />
+            </subscopes>
+        </scope>
+        <include syntax="self" collection="comments" />
+        <include syntax="self" collection="operators" />
+    </scopes>
+    
+    <collections>
+        <collection name="comments">
+            <scope name="zed.comment.single" spell-check="true">
+                <expression>\/\/.*</expression>
+            </scope>
+            <scope name="zed.comment.block" spell-check="true">
+                <starts-with>
+                    <expression>\/\*\*</expression>
+                </starts-with>
+                <ends-with>
+                    <expression>\*\/</expression>
+                </ends-with>
+            </scope>
+        </collection>
+        
+        <collection name="relation">
+            <scope name="zed.definition.relation_value">
+                <expression>([a-zA-Z-_|]+)</expression>
+                <capture number="1" name="zed.identifier.variable.value" />
+            </scope>
+            
+            <scope name="zed.definition.relation">
+                <expression>\s*(relation)\s+([a-zA-Z-_]+)\s*:\s+(.+)</expression>
+                <capture number="1" name="zed.keyword.relation" />
+                <capture number="2" name="zed.identifier.variable.name" />
+                <capture number="3" name="zed.definition.relation_value" />
+            </scope>
+            <scope name="zed.definition.subtype">
+                <include syntax="self" collection="operators" />
+                <expression>(.#)</expression>
+                <capture number="1" name="zed.identifier.variable.value" />
+            </scope>
+        </collection>
+    
+        
+        <collection name="permission">
+            <scope name="zed.definition.permission_value">
+                <expression>([a-zA-Z-_+->]+)</expression>
+                <capture number="1" name="zed.identifier.variable.value" />
+            </scope>
+        
+            <scope name="zed.identifier.permission">
+                <expression>\s*(permission)\s+([a-zA-Z-_]+)\s*=\s*(.+)</expression>
+                <capture number="1" name="zed.keyword.relation" />
+                <capture number="2" name="zed.identifier.variable.name" />
+                <capture number="3" name="zed.definition.permission_value" />
+            </scope>
+        </collection>
+        
+        <collection name="operators">
+            <scope name="zed.keyword.modifier">
+                <strings>
+                    <string>#</string>
+                    <string>+</string>
+                    <string>|</string>
+                    <string>-></string>
+                </strings>
+            </scope>
+        </collection>
+    </collections>
+</syntax>

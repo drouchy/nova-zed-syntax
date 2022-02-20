@@ -1,0 +1,8 @@
+{
+    "identifier": "dev.rouchy.zed",
+    "name": "zed",
+    "organization": "Rouchy",
+    "description": "SpikeDB schema definition syntax grammar.",
+    "version": "1.0",
+    "categories": ["languages"]
+}
